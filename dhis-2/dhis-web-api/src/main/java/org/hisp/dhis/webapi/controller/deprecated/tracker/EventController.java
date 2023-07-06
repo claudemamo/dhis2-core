@@ -158,6 +158,7 @@ import com.google.common.collect.Lists;
 @RequestMapping( value = EventController.RESOURCE_PATH )
 @ApiVersion( { DhisApiVersion.DEFAULT, DhisApiVersion.ALL } )
 @RequiredArgsConstructor
+@OpenApi.Ignore
 public class EventController
 {
     public static final String RESOURCE_PATH = "/events";

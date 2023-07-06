@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.hisp.dhis.common.OpenApi;
 import org.hisp.dhis.common.Pager;
 import org.hisp.dhis.common.PagerUtils;
 
@@ -131,6 +132,7 @@ public class ValidationResultQuery
         this.total = total;
     }
 
+    @OpenApi.Ignore
     public Pager getPager()
     {
         return PagerUtils.isSkipPaging( skipPaging, paging ) ? null : new Pager( page, total, pageSize );

@@ -67,6 +67,7 @@ public class ImportOptions
     private User user;
 
     @JsonProperty( namespace = DxfNamespaces.DXF_2_0 )
+    @OpenApi.Property(name = "idScheme", value = String.class)
     private IdSchemes idSchemes = new IdSchemes();
 
     @JsonProperty( namespace = DxfNamespaces.DXF_2_0 )

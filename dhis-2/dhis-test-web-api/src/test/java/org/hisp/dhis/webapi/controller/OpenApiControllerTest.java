@@ -32,14 +32,31 @@ import static org.hisp.dhis.utils.Assertions.assertLessOrEqual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import io.swagger.v3.core.util.Json;
+import org.apache.commons.io.IOUtils;
+import org.hisp.dhis.jsontree.JsonMixed;
 import org.hisp.dhis.jsontree.JsonObject;
+import org.hisp.dhis.jsontree.JsonString;
+import org.hisp.dhis.jsontree.JsonValue;
 import org.hisp.dhis.webapi.DhisControllerConvenienceTest;
 import org.junit.jupiter.api.Test;
 
 import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.parser.core.models.SwaggerParseResult;
+import org.openapitools.codegen.DefaultGenerator;
+import org.openapitools.codegen.config.CodegenConfigurator;
 
 /**
  * Tests the {@link org.hisp.dhis.webapi.openapi.OpenApiController} with Mock
@@ -91,4 +108,37 @@ class OpenApiControllerTest extends DhisControllerConvenienceTest
         assertLessOrEqual( 60, doc.getObject( "components.schemas" ).size() );
     }
 
+    @Test
+    void test()
+        throws
+        IOException
+    {
+        JsonObject doc = GET( "/openapi/openapi.json?failOnNameClash=true" ).content();
+
+        Path tmpFile = Files.createTempFile( "openapi", ".json" );
+        Files.writeString( tmpFile, doc.node().getDeclaration() );
+
+        CodegenConfigurator configurator = new CodegenConfigurator()
+            .addSchemaMapping(
+                "OrganisationUnit_getUserDataViewOrganisationUnits_getAllOrganisationUnitsByLevel_getGeoJson_getOrganisationUnitsWithMemberCount_getUserOrganisationUnits_getUserDataViewOrganisationUnitsWithFallback_getObjectList_getObjectListCsv_getObjectList_200_response",
+                "OrganisationUnit_getUserDataViewOrganisationUnits_getAllOrganisationUnitsByLevel_getGeoJson_getOrganisationUnitsWithMemberCount_getUserOrganisationUnits_getUserDataViewOrganisationUnitsWithFallback_getObjList_getObjListCsv_getObjList_200_response" )
+            .addSchemaMapping(
+                "organisation_unit_get_organisation_units_with_member_count_get_user_data_view_organisation_units_with_fallback_get_object_list_get_user_organisation_units_get_user_data_view_organisation_units_get_all_organisation_units_by_level_get_geo_json_get_object_list_get_object_list_csv200_response",
+                "organisation_unit_get_organisation_units_with_member_count_get_user_data_view_organisation_units_with_fallback_get_object_list_get_user_organisation_units_get_user_data_view_organisation_units_get_all_organisation_units_by_level_get_geo_json_get_obj_list_get_obj_list_csv200_response" )
+//            .addSchemaMapping(
+//                "organisation_unit_get_organisation_units_with_member_count_get_user_organisation_units_get_object_list_get_user_data_view_organisation_units_get_all_organisation_units_by_level_get_geo_json_get_user_data_view_organisation_units_with_fallback_get_object_list_get_object_list_csv200_response",
+//                "dsa" )
+//            .addSchemaMapping(
+//                "organisation_unit_get_organisation_units_with_member_count_get_object_list_get_user_data_view_organisation_units_with_fallback_get_user_organisation_units_get_user_data_view_organisation_units_get_all_organisation_units_by_level_get_geo_json_get_object_list_csv_get_object_list200_response",
+//                "dsa" )
+            .addSchemaMapping(
+                "OrganisationUnit_getOrganisationUnitsWithMemberCount_getUserDataViewOrganisationUnitsWithFallback_getObjectList_getUserOrganisationUnits_getUserDataViewOrganisationUnits_getAllOrganisationUnitsByLevel_getGeoJson_getObjectListCsv_getObjectList_200_response",
+                "OrganisationUnit_getOrganisationUnitsWithMemberCount_getUserDataViewOrganisationUnitsWithFallback_getObjList_getUserOrganisationUnits_getUserDataViewOrganisationUnits_getAllOrganisationUnitsByLevel_getGeoJson_getObjListCsv_getObjList_200_response" )
+
+            .setInputSpec( tmpFile.toAbsolutePath().toString() )
+            .setGeneratorName( "r" )
+            .setOutputDir( "out" );
+
+        new DefaultGenerator( false ).opts( configurator.toClientOptInput() ).generate();
+    }
 }

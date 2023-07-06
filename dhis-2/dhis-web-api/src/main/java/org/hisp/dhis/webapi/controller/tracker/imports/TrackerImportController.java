@@ -87,6 +87,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 @RequestMapping( value = RESOURCE_PATH )
 @ApiVersion( { DhisApiVersion.DEFAULT, DhisApiVersion.ALL } )
 @RequiredArgsConstructor
+@OpenApi.Ignore
 public class TrackerImportController
 {
     static final String TRACKER_JOB_ADDED = "Tracker job added";

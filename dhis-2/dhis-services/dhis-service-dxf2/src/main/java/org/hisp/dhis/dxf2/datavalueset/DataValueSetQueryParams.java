@@ -40,6 +40,7 @@ import lombok.Setter;
 
 import org.hisp.dhis.common.IdSchemes;
 import org.hisp.dhis.common.IdentifiableProperty;
+import org.hisp.dhis.common.OpenApi;
 
 /**
  * All query parameters to read data value sets.
@@ -138,6 +139,7 @@ public class DataValueSetQueryParams
 
     private String programStageInstanceIdScheme;
 
+    @OpenApi.Ignore
     public IdSchemes getInputIdSchemes()
     {
         IdSchemes schemes = new IdSchemes();
@@ -149,6 +151,7 @@ public class DataValueSetQueryParams
         return schemes;
     }
 
+    @OpenApi.Ignore
     public IdSchemes getOutputIdSchemes()
     {
         IdSchemes schemes = new IdSchemes();

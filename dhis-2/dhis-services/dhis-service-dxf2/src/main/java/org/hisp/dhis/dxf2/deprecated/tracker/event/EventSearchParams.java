@@ -40,6 +40,7 @@ import org.hisp.dhis.category.CategoryOptionCombo;
 import org.hisp.dhis.common.AssignedUserQueryParam;
 import org.hisp.dhis.common.AssignedUserSelectionMode;
 import org.hisp.dhis.common.IdSchemes;
+import org.hisp.dhis.common.OpenApi;
 import org.hisp.dhis.common.OrganisationUnitSelectionMode;
 import org.hisp.dhis.common.QueryItem;
 import org.hisp.dhis.event.EventStatus;
@@ -155,6 +156,7 @@ public class EventSearchParams
 
     private CategoryOptionCombo categoryOptionCombo;
 
+    @OpenApi.Property(name = "idScheme", value = String.class)
     private IdSchemes idSchemes = new IdSchemes();
 
     private Integer page;

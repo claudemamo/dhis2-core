@@ -300,7 +300,7 @@ final class ApiAnalyse
         // request parameters from method signature
         for ( Parameter p : source.getParameters() )
         {
-            if ( p.isAnnotationPresent( OpenApi.Ignore.class ) )
+            if ( p.isAnnotationPresent( OpenApi.Ignore.class ) || p.getType().equals( Class.class ) )
             {
                 continue;
             }

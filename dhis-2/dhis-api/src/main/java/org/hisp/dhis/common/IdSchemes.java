@@ -42,6 +42,7 @@ public class IdSchemes
 {
     public static final IdScheme DEFAULT_ID_SCHEME = IdScheme.UID;
 
+    @OpenApi.Property(String.class)
     private IdScheme idScheme;
 
     private IdScheme dataElementIdScheme;

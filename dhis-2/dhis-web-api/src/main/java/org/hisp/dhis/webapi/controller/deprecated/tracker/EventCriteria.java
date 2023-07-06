@@ -38,6 +38,7 @@ import lombok.NoArgsConstructor;
 import org.hisp.dhis.common.AssignedUserSelectionMode;
 import org.hisp.dhis.common.CodeGenerator;
 import org.hisp.dhis.common.IdSchemes;
+import org.hisp.dhis.common.OpenApi;
 import org.hisp.dhis.common.OrganisationUnitSelectionMode;
 import org.hisp.dhis.commons.collection.CollectionUtils;
 import org.hisp.dhis.commons.util.TextUtils;
@@ -108,6 +109,7 @@ public class EventCriteria extends PagingAndSortingCriteriaAdapter
 
     private Set<String> enrollments;
 
+    @OpenApi.Ignore
     private IdSchemes idSchemes = new IdSchemes();
 
     public Set<String> getAssignedUsers()

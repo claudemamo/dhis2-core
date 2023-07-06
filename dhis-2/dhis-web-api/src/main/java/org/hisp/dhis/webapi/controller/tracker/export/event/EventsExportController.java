@@ -80,6 +80,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @RequestMapping( value = RESOURCE_PATH + "/" + EventsExportController.EVENTS )
 @ApiVersion( { DhisApiVersion.DEFAULT, DhisApiVersion.ALL } )
 @RequiredArgsConstructor
+@OpenApi.Ignore
 class EventsExportController
 {
     protected static final String EVENTS = "events";

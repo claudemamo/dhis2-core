@@ -39,6 +39,7 @@ import com.google.common.collect.ImmutableMap;
  * @author Morten Olav Hansen <mortenoh@gmail.com>
  */
 @Getter
+@OpenApi.Property( value = IdentifiableProperty.class )
 public class IdScheme
 {
     public static final IdScheme NULL = new IdScheme( null );
